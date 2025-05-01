@@ -1,0 +1,10 @@
+services:
+  db-cidadao-alerta:
+    image: postgres:latest
+    container_name: db-cidadao-alerta
+    environment:
+      POSTGRES_DB: cidadao_alerta
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+    ports:
+      - "5432:5432"
