@@ -19,6 +19,16 @@ public class DatabaseSeeder implements CommandLineRunner {
     public void run(String... args) throws Exception {
         try (Connection connection = dataSource.getConnection()) {
             Statement statement = connection.createStatement();
+
+
+
+
+            // Truncate the table before inserting new data
+            statement.executeUpdate("TRUNCATE TABLE usuario RESTART IDENTITY CASCADE");
+
+
+
+
             String sql = "INSERT INTO usuario (nome, senha, email) VALUES " +
                     "('Thiago Monteiro', 'senha123', 'thiago28@gmail.com'), " +
                     "('João Silva', 'senha456', 'joao.silva@email.com'), " +
