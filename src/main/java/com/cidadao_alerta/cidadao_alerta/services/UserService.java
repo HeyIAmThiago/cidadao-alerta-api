@@ -1,8 +1,8 @@
 package com.cidadao_alerta.cidadao_alerta.services;
 
-import com.cidadao_alerta.cidadao_alerta.DTOs.UserDTOResponse;
-import com.cidadao_alerta.cidadao_alerta.entities.UserEntity;
-import com.cidadao_alerta.cidadao_alerta.mappers.UserMapper;
+import com.cidadao_alerta.cidadao_alerta.models.dtos.UserDTOResponse;
+import com.cidadao_alerta.cidadao_alerta.models.entities.UserEntity;
+import com.cidadao_alerta.cidadao_alerta.models.mappers.UserMapper;
 import com.cidadao_alerta.cidadao_alerta.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,5 +32,7 @@ public class UserService {
         return usersResponse;
     }
 
+    public void createUser() {
 
+    }
 }

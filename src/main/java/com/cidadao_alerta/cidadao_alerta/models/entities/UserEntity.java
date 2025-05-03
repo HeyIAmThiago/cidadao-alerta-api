@@ -1,5 +1,6 @@
-package com.cidadao_alerta.cidadao_alerta.entities;
+package com.cidadao_alerta.cidadao_alerta.models.entities;
 
+import com.cidadao_alerta.cidadao_alerta.models.enums.Role;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,14 +23,9 @@ public class UserEntity {
     @Column(name="email")
     private String email;
 
-
-
-
-
-
-
+    @Enumerated(EnumType.STRING)
     @Column(name="role")
-    private String role;
+    private Role role;
 
 
 }
