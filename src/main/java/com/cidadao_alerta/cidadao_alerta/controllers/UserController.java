@@ -1,8 +1,8 @@
 package com.cidadao_alerta.cidadao_alerta.controllers;
 
 
-import com.cidadao_alerta.cidadao_alerta.entities.UsuarioEntity;
-import com.cidadao_alerta.cidadao_alerta.services.UsuarioService;
+import com.cidadao_alerta.cidadao_alerta.DTOs.UserDTOResponse;
+import com.cidadao_alerta.cidadao_alerta.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,18 +12,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/usuario")
-public class UsuarioController {
+public class UserController {
 
     @Autowired
-    UsuarioService usuarioService;
+    UserService userService;
 
 
     @GetMapping
-    List<UsuarioEntity> getAllUsers() {
-
-
-        return usuarioService.getAllUsers();
-
-
+    List<UserDTOResponse> getAllUsers() {
+        return userService.getAllUsers();
     }
 }

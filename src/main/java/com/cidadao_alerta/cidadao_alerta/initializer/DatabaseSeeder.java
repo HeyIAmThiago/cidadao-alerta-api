@@ -24,17 +24,17 @@ public class DatabaseSeeder implements CommandLineRunner {
 
 
             // Truncate the table before inserting new data
-            statement.executeUpdate("TRUNCATE TABLE usuario RESTART IDENTITY CASCADE");
+            statement.executeUpdate("TRUNCATE TABLE User_App RESTART IDENTITY CASCADE");
 
 
 
 
-            String sql = "INSERT INTO usuario (nome, senha, email) VALUES " +
-                    "('Thiago Monteiro', 'senha123', 'thiago28@gmail.com'), " +
-                    "('João Silva', 'senha456', 'joao.silva@email.com'), " +
-                    "('Maria Oliveira', 'senha789', 'maria.oliveira@email.com'), " +
-                    "('Pedro Santos', 'senha101', 'pedro.santos@email.com'), " +
-                    "('Ana Costa', 'senha102', 'ana.costa@email.com');";
+            String sql = "INSERT INTO User_App (name, password, email, ROLE) VALUES " +
+                    "('Thiago Monteiro', 'senha123', 'thiago28@gmail.com', 'ADMIN'), " +
+                    "('João Silva', 'senha456', 'joao.silva@email.com', 'MODERATOR'), " +
+                    "('Maria Oliveira', 'senha789', 'maria.oliveira@email.com', 'CITIZEN'), " +
+                    "('Pedro Santos', 'senha101', 'pedro.santos@email.com', 'CITIZEN'), " +
+                    "('Ana Costa', 'senha102', 'ana.costa@email.com', 'CITIZEN');";
             statement.executeUpdate(sql);
         } catch (Exception e) {
             e.printStackTrace();

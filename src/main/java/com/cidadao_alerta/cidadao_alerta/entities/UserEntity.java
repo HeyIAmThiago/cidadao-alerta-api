@@ -7,20 +7,23 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name="usuario")
-public class UsuarioEntity {
+@Table(name="User_App")
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="nome")
-    private String nome;
+    @Column(name="name")
+    private String name;
 
-    @Column(name="senha")
-    private String senha;
+    @Column(name="password")
+    private String password;
 
     @Column(name="email")
     private String email;
+
+    @Column(name="role")
+    private String role;
 
 
 }
