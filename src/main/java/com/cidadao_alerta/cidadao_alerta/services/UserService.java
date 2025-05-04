@@ -1,5 +1,6 @@
 package com.cidadao_alerta.cidadao_alerta.services;
 
+import com.cidadao_alerta.cidadao_alerta.models.dtos.UserDTORequest;
 import com.cidadao_alerta.cidadao_alerta.models.dtos.UserDTOResponse;
 import com.cidadao_alerta.cidadao_alerta.models.entities.UserEntity;
 import com.cidadao_alerta.cidadao_alerta.models.mappers.UserMapper;
@@ -32,7 +33,15 @@ public class UserService {
         return usersResponse;
     }
 
-    public void createUser() {
+    public UserEntity createNewUser(UserDTORequest userDTO) {
 
+        UserEntity entityToRegister = userMapper.toEntity(userDTO);
+
+        var result = userRepository.save(entityToRegister);
+
+
+        return result;
     }
+
+
 }

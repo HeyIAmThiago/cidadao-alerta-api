@@ -1,5 +1,6 @@
 package com.cidadao_alerta.cidadao_alerta.models.mappers;
 
+import com.cidadao_alerta.cidadao_alerta.models.dtos.UserDTORequest;
 import com.cidadao_alerta.cidadao_alerta.models.dtos.UserDTOResponse;
 import com.cidadao_alerta.cidadao_alerta.models.entities.UserEntity;
 import org.springframework.stereotype.Component;
@@ -17,6 +18,16 @@ public class UserMapper {
         dto.setRole(userEntity.getRole());
         return dto;
 
+    }
+
+    public UserEntity toEntity(UserDTORequest userDTO) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setEmail(userDTO.getEmail());
+        userEntity.setName(userDTO.getName());
+        userEntity.setPassword(userDTO.getPassword());
+        userEntity.setRole(userDTO.getRole());
+
+        return userEntity;
     }
 
 
