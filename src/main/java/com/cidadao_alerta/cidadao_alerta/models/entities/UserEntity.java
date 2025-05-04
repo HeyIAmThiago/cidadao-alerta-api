@@ -4,15 +4,16 @@ import com.cidadao_alerta.cidadao_alerta.models.enums.Role;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import java.util.UUID;
 
 @Getter
 @Setter
 @Entity
-@Table(name="User_App")
+@Table(name="user_app")
 public class UserEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @Column(name="name")
     private String name;

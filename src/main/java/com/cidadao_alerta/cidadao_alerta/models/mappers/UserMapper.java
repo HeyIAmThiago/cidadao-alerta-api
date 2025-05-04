@@ -5,6 +5,8 @@ import com.cidadao_alerta.cidadao_alerta.models.dtos.UserDTOResponse;
 import com.cidadao_alerta.cidadao_alerta.models.entities.UserEntity;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class UserMapper {
 

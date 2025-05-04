@@ -6,10 +6,13 @@ import com.cidadao_alerta.cidadao_alerta.models.entities.UserEntity;
 import com.cidadao_alerta.cidadao_alerta.models.mappers.UserMapper;
 import com.cidadao_alerta.cidadao_alerta.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -30,6 +33,7 @@ public class UserService {
             usersResponse.add(userMapper.toDTO(usuario));
 
 
+
         return usersResponse;
     }
 
@@ -41,6 +45,14 @@ public class UserService {
 
 
         return result;
+    }
+
+    public UserDTOResponse getUserById(UUID id) {
+        var result = userRepository.findById(id).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Nenhum usuário encontrado!")
+        );
+
+        return userMapper.toDTO(result);
     }
 
 

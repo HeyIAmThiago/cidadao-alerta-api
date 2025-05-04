@@ -27,18 +27,12 @@ public class DatabaseSeeder implements CommandLineRunner {
 
 
 
-            // Truncate the table before inserting new data
-            statement.executeUpdate("TRUNCATE TABLE User_App RESTART IDENTITY CASCADE");
+            statement.executeUpdate("TRUNCATE TABLE user_app RESTART IDENTITY CASCADE");
 
+            String sqlUser = "INSERT INTO user_app (name, password, email, role) VALUES " +
+                    "('Thiago Monteiro', 'senha123', 'thiago28@gmail.com', 'ADMIN')";
+            statement.executeUpdate(sqlUser);
 
-
-            String sql = "INSERT INTO User_App (name, password, email, ROLE) VALUES " +
-                    "('Thiago Monteiro', 'senha123', 'thiago28@gmail.com', 'ADMIN'), " +
-                    "('João Silva', 'senha456', 'joao.silva@email.com', 'MODERATOR'), " +
-                    "('Maria Oliveira', 'senha789', 'maria.oliveira@email.com', 'CITIZEN'), " +
-                    "('Pedro Santos', 'senha101', 'pedro.santos@email.com', 'CITIZEN'), " +
-                    "('Ana Costa', 'senha102', 'ana.costa@email.com', 'CITIZEN');";
-            statement.executeUpdate(sql);
 
             statement.executeUpdate("TRUNCATE TABLE report CASCADE");
 
