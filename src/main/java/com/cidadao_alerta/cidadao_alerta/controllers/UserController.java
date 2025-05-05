@@ -38,7 +38,16 @@ public class UserController {
         try {
             return userService.getUserById(id);
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Nenhum usuário encontrado!");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Nenhum usuário encontrado com este ID!");
         }
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseBody
+    UserEntity delete(@PathVariable UUID id) {
+        var result = userService.delete(id);
+
+        return result;
+
     }
 }

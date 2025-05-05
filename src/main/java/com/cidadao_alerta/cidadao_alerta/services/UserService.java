@@ -32,8 +32,6 @@ public class UserService {
         for (UserEntity usuario : usuarios)
             usersResponse.add(userMapper.toDTO(usuario));
 
-
-
         return usersResponse;
     }
 
@@ -41,10 +39,8 @@ public class UserService {
 
         UserEntity entityToRegister = userMapper.toEntity(userDTO);
 
-        var result = userRepository.save(entityToRegister);
 
-
-        return result;
+        return userRepository.save(entityToRegister);
     }
 
     public UserDTOResponse getUserById(UUID id) {
@@ -54,6 +50,29 @@ public class UserService {
 
         return userMapper.toDTO(result);
     }
+
+    public UserEntity delete(UUID id) {
+
+
+        UserEntity userToDelete = userRepository.findById(id).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Nenhum usuário encontrado!")
+        );
+
+
+        userRepository.delete(userToDelete);
+
+        return userToDelete;
+
+
+
+
+
+
+
+
+    }
+
+
 
 
 }
