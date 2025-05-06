@@ -28,7 +28,6 @@ public class UserService {
         ArrayList<UserDTOResponse> usersResponse= new ArrayList<>();
         ArrayList<UserEntity> usuarios = new ArrayList<>(userRepository.findAll());
 
-
         for (UserEntity usuario : usuarios)
             usersResponse.add(userMapper.toDTO(usuario));
 

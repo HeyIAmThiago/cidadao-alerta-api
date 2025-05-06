@@ -43,6 +43,15 @@ public class DatabaseSeeder implements CommandLineRunner {
                     "('e2f4a7c9-1b3d-48e9-8f2a-6c5b7d8e9f0a', 'Denuncia 5', 'Descrição da denuncia 5', 'https://picsum.photos/200/300');";
             statement.executeUpdate(sqlReport);
 
+            String sqlCategory = "INSERT INTO category (description) VALUES " +
+                    "('Enchente'), " +
+                    "('Tiroteio'), " +
+                    "('Arrastão'), " +
+                    "('Traficantes');";
+
+            statement.executeUpdate(sqlCategory);
+
+
 
         } catch (Exception e) {
             e.printStackTrace();
