@@ -1,5 +1,6 @@
 package com.cidadao_alerta.cidadao_alerta.models.dtos;
 
+import java.util.List;
 import java.util.UUID;
 
 import com.cidadao_alerta.cidadao_alerta.models.entities.ReportEntity;
@@ -8,14 +9,16 @@ public record ReportDTOResponse(
   UUID id,
   String title,
   String description,
-  String imageUrl
+  String imageUrl,
+  List<CategoryDTOResponse> categories
 ) {
-  public ReportDTOResponse(ReportEntity report) {
+  public ReportDTOResponse(ReportEntity report, List<CategoryDTOResponse> categoriesDTO) {
     this(
       report.getId(),
       report.getTitle(),
       report.getDescription(),
-      report.getImageUrl()
+      report.getImageUrl(),
+      categoriesDTO
     );
   }
 }

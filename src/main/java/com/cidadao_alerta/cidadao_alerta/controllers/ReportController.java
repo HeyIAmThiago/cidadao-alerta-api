@@ -24,7 +24,6 @@ import com.cidadao_alerta.cidadao_alerta.services.ReportService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
 @RestController
 @RequestMapping(path = "/denuncia")
 @RequiredArgsConstructor

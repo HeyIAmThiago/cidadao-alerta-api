@@ -9,9 +9,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.cidadao_alerta.cidadao_alerta.models.dtos.CategoryDTOResponse;
 import com.cidadao_alerta.cidadao_alerta.models.dtos.ReportDTORequest;
 import com.cidadao_alerta.cidadao_alerta.models.dtos.ReportDTOResponse;
 import com.cidadao_alerta.cidadao_alerta.models.entities.ReportEntity;
+import com.cidadao_alerta.cidadao_alerta.models.mappers.CategoryMapper;
 import com.cidadao_alerta.cidadao_alerta.models.mappers.ReportMapper;
 import com.cidadao_alerta.cidadao_alerta.repositories.ReportRepository;
 
@@ -26,7 +28,10 @@ public class ReportService {
   public List<ReportDTOResponse> getAllReports() {
     List<ReportEntity> reports = this.reportRepository.findAll();
     List<ReportDTOResponse> reportsDTO = reports.stream().map(
-      report -> new ReportDTOResponse(report)
+      report -> new ReportDTOResponse(
+        report,
+        CategoryMapper.listEntityToDto(report.getCategories())
+      )
     ).toList();
 
     return reportsDTO;
@@ -35,7 +40,10 @@ public class ReportService {
   public Page<ReportDTOResponse> getReports(Pageable pageable) {
     Page<ReportEntity> reports = this.reportRepository.findAll(pageable);
     Page<ReportDTOResponse> reportsDTO = reports.map(
-      report -> new ReportDTOResponse(report)
+      report -> new ReportDTOResponse(
+        report, 
+        CategoryMapper.listEntityToDto(report.getCategories())
+      )
     );
 
     return reportsDTO;
@@ -44,7 +52,9 @@ public class ReportService {
   public ReportDTOResponse getReportById(UUID id) {
     ReportEntity report = this.getReportEntity(id);
 
-    return new ReportDTOResponse(report);
+    List<CategoryDTOResponse> categoriesDTO = CategoryMapper.listEntityToDto(report.getCategories());
+
+    return new ReportDTOResponse(report, categoriesDTO);
   }
 
   public ReportEntity getReportEntity(UUID id) {
@@ -60,7 +70,9 @@ public class ReportService {
 
     this.reportRepository.save(report);
 
-    return new ReportDTOResponse(report);
+    List<CategoryDTOResponse> categoriesDTO = CategoryMapper.listEntityToDto(report.getCategories());
+
+    return new ReportDTOResponse(report, categoriesDTO);
   }
 
   public List<ReportDTOResponse> createAll(List<ReportDTORequest> reportsDTO) {
@@ -71,7 +83,10 @@ public class ReportService {
     this.reportRepository.saveAll(reports);
 
     List<ReportDTOResponse> reportsDTOResponse = reports.stream().map(
-      report -> new ReportDTOResponse(report)
+      report -> new ReportDTOResponse(
+        report,
+        CategoryMapper.listEntityToDto(report.getCategories())
+      )
     ).toList();
 
     return reportsDTOResponse;
@@ -81,7 +96,8 @@ public class ReportService {
     ReportEntity report = this.getReportEntity(id);
 
     this.reportRepository.delete(report);
+    List<CategoryDTOResponse> categoriesDTO = CategoryMapper.listEntityToDto(report.getCategories());
 
-    return new ReportDTOResponse(report);
+    return new ReportDTOResponse(report, categoriesDTO);
   }
 }
