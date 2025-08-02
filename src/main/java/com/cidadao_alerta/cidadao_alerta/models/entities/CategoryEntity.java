@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -24,4 +26,6 @@ public class CategoryEntity {
     @Column(name="description")
     private String description;
 
+    @ManyToMany(mappedBy = "categories")
+    private List<ReportEntity> reports = new ArrayList<>();
 }

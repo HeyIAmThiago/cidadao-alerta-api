@@ -10,6 +10,7 @@ public class ReportMapper {
       .title(dto.title())
       .description(dto.description())
       .imageUrl(dto.imageUrl())
+      .categories(dto.categories())
       .build()
     ;
   }
