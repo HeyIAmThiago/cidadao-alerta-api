@@ -68,10 +68,10 @@ public class CommentService {
 
     public CommentDTOResponse create(CommentDTORequest comment) {
 
-        var user = userRepository.findById(comment.getAuthor_id())
+        var user = userRepository.findById(comment.author_id())
                 .orElseThrow(() -> new ResourceNotFoundException("User does not exist"));
 
-        var report = reportRepository.findById(comment.getReport_id())
+        var report = reportRepository.findById(comment.report_id())
                 .orElseThrow(() -> new ResourceNotFoundException("Report does not exist"));
 
         var resource = CommentMapper.toEntity(comment, user, report);

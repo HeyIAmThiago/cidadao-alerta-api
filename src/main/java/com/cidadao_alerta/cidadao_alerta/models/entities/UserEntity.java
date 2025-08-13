@@ -1,9 +1,16 @@
     package com.cidadao_alerta.cidadao_alerta.models.entities;
 
     import com.cidadao_alerta.cidadao_alerta.models.enums.Role;
-    import com.fasterxml.jackson.annotation.JsonIgnore;
-    import com.fasterxml.jackson.annotation.JsonManagedReference;
-    import jakarta.persistence.*;
+    import jakarta.persistence.Entity;
+    import jakarta.persistence.Table;
+    import jakarta.persistence.Id;
+    import jakarta.persistence.GeneratedValue;
+    import jakarta.persistence.GenerationType;
+    import jakarta.persistence.Column;
+    import jakarta.persistence.Enumerated;
+    import jakarta.persistence.EnumType;
+    import jakarta.persistence.OneToMany;
+    import jakarta.persistence.CascadeType;
     import lombok.Getter;
     import lombok.Setter;
 
@@ -31,7 +38,6 @@
         @Enumerated(EnumType.STRING)
         @Column(name="role")
         private Role role;
-
 
         @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
         private Set<CommentEntity> comments;

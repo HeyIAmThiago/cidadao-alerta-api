@@ -24,10 +24,10 @@ public class UserMapper {
 
     public UserEntity toEntity(UserDTORequest userDTO) {
         UserEntity userEntity = new UserEntity();
-        userEntity.setEmail(userDTO.getEmail());
-        userEntity.setName(userDTO.getName());
-        userEntity.setPassword(userDTO.getPassword());
-        userEntity.setRole(userDTO.getRole());
+        userEntity.setEmail(userDTO.email());
+        userEntity.setName(userDTO.name());
+        userEntity.setPassword(userDTO.password());
+        userEntity.setRole(userDTO.role());
 
         return userEntity;
     }

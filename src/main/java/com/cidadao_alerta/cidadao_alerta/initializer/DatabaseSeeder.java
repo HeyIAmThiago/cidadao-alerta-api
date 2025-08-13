@@ -2,9 +2,7 @@ package com.cidadao_alerta.cidadao_alerta.initializer;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
 import com.cidadao_alerta.cidadao_alerta.services.ReportService;
-
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.Statement;
@@ -25,18 +23,14 @@ public class DatabaseSeeder implements CommandLineRunner {
         try (Connection connection = dataSource.getConnection()) {
             Statement statement = connection.createStatement();
 
-            // Limpa usuários
             statement.executeUpdate("TRUNCATE TABLE user_app RESTART IDENTITY CASCADE");
 
-            // Usuário padrão
             String sqlUser = "INSERT INTO user_app (name, password, email, role) VALUES " +
                     "('Thiago Monteiro', 'senha123', 'thiago28@gmail.com', 'ADMIN')";
             statement.executeUpdate(sqlUser);
 
-            // Limpa reports
             statement.executeUpdate("TRUNCATE TABLE report CASCADE");
 
-            // Reports
             String sqlReport = "INSERT INTO report (id, title, description, image_url) VALUES " +
                     "('a6c8e2c4-8d7d-4c0a-bf1e-6a7b3c2d1e4f', 'Denuncia 1', 'Descrição da denuncia 1', 'https://picsum.photos/200/300'), " +
                     "('b5d2f9a1-3c4e-42f9-8b2d-5f6e7c8a9b0c', 'Denuncia 2', 'Descrição da denuncia 2', 'https://picsum.photos/200/300'), " +
@@ -45,7 +39,6 @@ public class DatabaseSeeder implements CommandLineRunner {
                     "('e2f4a7c9-1b3d-48e9-8f2a-6c5b7d8e9f0a', 'Denuncia 5', 'Descrição da denuncia 5', 'https://picsum.photos/200/300');";
             statement.executeUpdate(sqlReport);
 
-            // Categorias
             String sqlCategory = "INSERT INTO category (description) VALUES " +
                     "('Enchente'), " +
                     "('Tiroteio'), " +
@@ -53,10 +46,7 @@ public class DatabaseSeeder implements CommandLineRunner {
                     "('Traficantes');";
             statement.executeUpdate(sqlCategory);
 
-            // Limpa comentários
             statement.executeUpdate("TRUNCATE TABLE comment CASCADE");
-
-            // Comentários vinculados aos reports
 
             String sqlComments = ""
                     + "INSERT INTO comment (text, user_id, report_id, upvotes) VALUES "
@@ -84,9 +74,7 @@ public class DatabaseSeeder implements CommandLineRunner {
                     + "('Precisamos nos mobilizar e cobrar ação das autoridades.', "
                     + "(SELECT id FROM user_app WHERE email = 'thiago28@gmail.com'), "
                     + "'e2f4a7c9-1b3d-48e9-8f2a-6c5b7d8e9f0a', 6);";
-
             statement.executeUpdate(sqlComments);
-
         } catch (Exception e) {
             e.printStackTrace();
         }
