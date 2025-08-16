@@ -1,0 +1,9 @@
+CREATE TABLE comment (
+    id          UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    text        TEXT NOT NULL,
+    user_id     UUID NOT NULL REFERENCES user_app(id) ON DELETE CASCADE,
+    report_id   UUID NOT NULL REFERENCES report(id) ON DELETE CASCADE,
+    created_at  TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at  TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    upvotes     INT NOT NULL DEFAULT 0
+);

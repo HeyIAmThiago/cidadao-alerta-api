@@ -13,11 +13,8 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/category")
 public class CategoryController {
-
     @Autowired
     CategoryService categoryService;
-
-
 
     @GetMapping
     List<CategoryEntity> findAll() {

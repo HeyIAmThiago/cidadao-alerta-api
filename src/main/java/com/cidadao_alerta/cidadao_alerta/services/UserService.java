@@ -35,9 +35,7 @@ public class UserService {
     }
 
     public UserEntity createNewUser(UserDTORequest userDTO) {
-
         UserEntity entityToRegister = userMapper.toEntity(userDTO);
-
 
         return userRepository.save(entityToRegister);
     }
