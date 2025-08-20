@@ -1,7 +1,8 @@
 name: Build-and-Test
 
-on:
-  push:
+on: [push]
+
+permissions: write-all
 
 jobs:
   build:
@@ -46,4 +47,3 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: allure-history
-
