@@ -9,7 +9,7 @@ class CidadaoAlertaApplicationTests {
 
 	@Test
 	void contextLoads() {
-		Assertions.assertEquals("teste", "teste");
+		Assertions.assertEquals("teste", "ola");
 	}
 
 }
