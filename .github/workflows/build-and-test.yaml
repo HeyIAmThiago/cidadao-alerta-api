@@ -24,7 +24,7 @@ jobs:
         run: mvn --batch-mode test
 
       - name: Load Test Report History
-        uses: actions/checkout@4
+        uses: actions/checkout@v5
         if: always()
         continue-on-error: true
         with:
