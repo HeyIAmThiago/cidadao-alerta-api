@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,8 +20,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.cidadao_alerta.cidadao_alerta.models.dtos.ReportDTORequest;
 import com.cidadao_alerta.cidadao_alerta.models.dtos.ReportDTOResponse;
+import com.cidadao_alerta.cidadao_alerta.models.dtos.ReportDTOUpdate;
 import com.cidadao_alerta.cidadao_alerta.services.ReportService;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -79,4 +83,15 @@ public class ReportController {
 
     return ResponseEntity.status(HttpStatus.OK).body(reportDeleted);
   }
+
+  @PutMapping(path = "/{id}")
+  public ResponseEntity<ReportDTOResponse> editReport(
+    @PathVariable UUID id,
+    @Valid @NotNull ReportDTOUpdate editReportDto
+  ) {
+    ReportDTOResponse reportUpdated = this.reportService.editReport(id, editReportDto);
+
+    return ResponseEntity.ok().body(reportUpdated);
+  }
+
 }

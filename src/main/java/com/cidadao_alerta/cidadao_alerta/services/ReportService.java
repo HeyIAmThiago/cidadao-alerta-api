@@ -12,7 +12,10 @@ import org.springframework.web.server.ResponseStatusException;
 import com.cidadao_alerta.cidadao_alerta.models.dtos.CategoryDTOResponse;
 import com.cidadao_alerta.cidadao_alerta.models.dtos.ReportDTORequest;
 import com.cidadao_alerta.cidadao_alerta.models.dtos.ReportDTOResponse;
+import com.cidadao_alerta.cidadao_alerta.models.dtos.ReportDTOUpdate;
 import com.cidadao_alerta.cidadao_alerta.models.entities.ReportEntity;
+import com.cidadao_alerta.cidadao_alerta.models.entities.StatusReportEntity;
+import com.cidadao_alerta.cidadao_alerta.models.enums.StatusReportEnum;
 import com.cidadao_alerta.cidadao_alerta.models.mappers.CategoryMapper;
 import com.cidadao_alerta.cidadao_alerta.models.mappers.ReportMapper;
 import com.cidadao_alerta.cidadao_alerta.repositories.ReportRepository;
@@ -24,6 +27,7 @@ import lombok.RequiredArgsConstructor;
 public class ReportService {
 
   private final ReportRepository reportRepository;
+  private final StatusReportService statusReportService;
   
   public List<ReportDTOResponse> getAllReports() {
     List<ReportEntity> reports = this.reportRepository.findAll();
@@ -66,9 +70,10 @@ public class ReportService {
   }
 
   public ReportDTOResponse create(ReportDTORequest reportDTO) {
-    ReportEntity report = ReportMapper.dtoToEntity(reportDTO);
+    final StatusReportEntity statusInicial = this.statusReportService.findStatus(StatusReportEnum.PENDENTE);
+    ReportEntity report = ReportMapper.dtoToEntity(reportDTO, statusInicial);
 
-    this.reportRepository.save(report);
+    report = this.reportRepository.save(report);
 
     List<CategoryDTOResponse> categoriesDTO = CategoryMapper.listEntityToDto(report.getCategories());
 
@@ -76,11 +81,12 @@ public class ReportService {
   }
 
   public List<ReportDTOResponse> createAll(List<ReportDTORequest> reportsDTO) {
+    final StatusReportEntity statusInicial = this.statusReportService.findStatus(StatusReportEnum.PENDENTE);
     List<ReportEntity> reports = reportsDTO.stream().map(
-      report -> ReportMapper.dtoToEntity(report)
+      report -> ReportMapper.dtoToEntity(report, statusInicial)
     ).toList();
 
-    this.reportRepository.saveAll(reports);
+    reports = this.reportRepository.saveAll(reports);
 
     List<ReportDTOResponse> reportsDTOResponse = reports.stream().map(
       report -> new ReportDTOResponse(
@@ -96,6 +102,17 @@ public class ReportService {
     ReportEntity report = this.getReportEntity(id);
 
     this.reportRepository.delete(report);
+    List<CategoryDTOResponse> categoriesDTO = CategoryMapper.listEntityToDto(report.getCategories());
+
+    return new ReportDTOResponse(report, categoriesDTO);
+  }
+
+  public ReportDTOResponse editReport(UUID id, ReportDTOUpdate editReportDto) {
+    ReportEntity report = this.getReportEntity(id);
+
+    report.setTitle(editReportDto.title());
+    report.setDescription(editReportDto.description());
+
     List<CategoryDTOResponse> categoriesDTO = CategoryMapper.listEntityToDto(report.getCategories());
 
     return new ReportDTOResponse(report, categoriesDTO);
