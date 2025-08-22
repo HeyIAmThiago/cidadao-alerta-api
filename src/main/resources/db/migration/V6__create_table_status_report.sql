@@ -1,0 +1,4 @@
+CREATE TABLE status_report(
+  id UUID PRIMARY KEY NOT NULL,
+  status VARCHAR(25) UNIQUE NOT NULL
+);
