@@ -37,12 +37,18 @@ public class DatabaseSeeder implements CommandLineRunner {
             statement.executeUpdate("TRUNCATE TABLE report CASCADE");
 
             // Reports
-            String sqlReport = "INSERT INTO report (id, title, description, image_url) VALUES " +
-                    "('a6c8e2c4-8d7d-4c0a-bf1e-6a7b3c2d1e4f', 'Denuncia 1', 'Descrição da denuncia 1', 'https://picsum.photos/200/300'), " +
-                    "('b5d2f9a1-3c4e-42f9-8b2d-5f6e7c8a9b0c', 'Denuncia 2', 'Descrição da denuncia 2', 'https://picsum.photos/200/300'), " +
-                    "('c1e7d4b8-5f3a-4d2e-9c8b-0a1f2e3d4c5b', 'Denuncia 3', 'Descrição da denuncia 3', 'https://picsum.photos/200/300'), " +
-                    "('d9b3e7f2-6c5a-4e1b-8d3c-2f4a5b6c7e8f', 'Denuncia 4', 'Descrição da denuncia 4', 'https://picsum.photos/200/300'), " +
-                    "('e2f4a7c9-1b3d-48e9-8f2a-6c5b7d8e9f0a', 'Denuncia 5', 'Descrição da denuncia 5', 'https://picsum.photos/200/300');";
+            String sqlReport = "INSERT INTO report (id, title, description, image_url, status_report_id) VALUES " +
+                "('a6c8e2c4-8d7d-4c0a-bf1e-6a7b3c2d1e4f', 'Denuncia 1', 'Descrição da denuncia 1', 'https://picsum.photos/200/300', " +
+                "(SELECT id FROM status_report WHERE status = 'PENDENTE'))," +
+                "('b5d2f9a1-3c4e-42f9-8b2d-5f6e7c8a9b0c', 'Denuncia 2', 'Descrição da denuncia 2', 'https://picsum.photos/200/300', " +
+                "(SELECT id FROM status_report WHERE status = 'PENDENTE'))," +
+                "('c1e7d4b8-5f3a-4d2e-9c8b-0a1f2e3d4c5b', 'Denuncia 3', 'Descrição da denuncia 3', 'https://picsum.photos/200/300', " +
+                "(SELECT id FROM status_report WHERE status = 'PENDENTE'))," +
+                "('d9b3e7f2-6c5a-4e1b-8d3c-2f4a5b6c7e8f', 'Denuncia 4', 'Descrição da denuncia 4', 'https://picsum.photos/200/300', " +
+                "(SELECT id FROM status_report WHERE status = 'PENDENTE'))," +
+                "('e2f4a7c9-1b3d-48e9-8f2a-6c5b7d8e9f0a', 'Denuncia 5', 'Descrição da denuncia 5', 'https://picsum.photos/200/300', " +
+                "(SELECT id FROM status_report WHERE status = 'PENDENTE')) " +
+                "ON CONFLICT (id) DO NOTHING;";
             statement.executeUpdate(sqlReport);
 
             // Categorias
