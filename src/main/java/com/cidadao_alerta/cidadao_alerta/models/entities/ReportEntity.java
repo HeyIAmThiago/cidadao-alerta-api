@@ -40,7 +40,10 @@ public class ReportEntity {
   @Column(name = "image_url")
   private String imageUrl;
 
-
   @OneToMany(mappedBy = "report", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private Set<CommentEntity> comments;
+
+  @ManyToOne
+  @JoinColumn(name = "status_report_id")
+  private StatusReportEntity status;
 }
