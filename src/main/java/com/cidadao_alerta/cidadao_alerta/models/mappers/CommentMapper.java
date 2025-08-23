@@ -2,6 +2,7 @@ package com.cidadao_alerta.cidadao_alerta.models.mappers;
 
 import com.cidadao_alerta.cidadao_alerta.models.dtos.CommentDTORequest;
 import com.cidadao_alerta.cidadao_alerta.models.dtos.CommentDTOResponse;
+import com.cidadao_alerta.cidadao_alerta.models.entities.AuditInfo;
 import com.cidadao_alerta.cidadao_alerta.models.entities.CommentEntity;
 import com.cidadao_alerta.cidadao_alerta.models.entities.ReportEntity;
 import com.cidadao_alerta.cidadao_alerta.models.entities.UserEntity;
@@ -24,6 +25,6 @@ public class CommentMapper {
     }
 
     public static CommentEntity toEntity(CommentDTORequest comment, UserEntity user, ReportEntity report) {
-        return new CommentEntity(null, comment.text(), 0L, LocalDateTime.now(), LocalDateTime.now(), user, report);
+        return new CommentEntity(null, comment.text(), 0L, new AuditInfo(LocalDateTime.now(), LocalDateTime.now()), user, report);
     }
 }
