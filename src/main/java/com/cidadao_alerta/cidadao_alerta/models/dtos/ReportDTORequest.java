@@ -3,6 +3,7 @@ package com.cidadao_alerta.cidadao_alerta.models.dtos;
 import java.util.List;
 
 import com.cidadao_alerta.cidadao_alerta.models.entities.CategoryEntity;
+import com.cidadao_alerta.cidadao_alerta.models.entities.StatusReportEntity;
 
 import jakarta.validation.constraints.NotBlank;
 

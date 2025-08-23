@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.FetchType;
@@ -52,4 +53,8 @@ public class ReportEntity {
 
   @OneToMany(mappedBy = "report", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private Set<CommentEntity> comments;
+
+  @ManyToOne
+  @JoinColumn(name = "status_report_id")
+  private StatusReportEntity status;
 }
