@@ -6,9 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
-
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -29,13 +26,12 @@ public class CommentEntity {
     @Column(name="upvotes")
     private Long upvotes;
 
-    @Column(name="created_at")
-    @CreationTimestamp
-    private LocalDateTime created_at;
-
-    @Column(name="updated_at")
-    @CreationTimestamp
-    private LocalDateTime updated_at;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride( name = "created_at", column = @Column(name = "created_at")),
+            @AttributeOverride( name = "updated_at", column = @Column(name = "updated_at"))
+    })
+    AuditInfo temporalInfo;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
