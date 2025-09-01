@@ -1,0 +1,6 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Mon Sep 01 22:30:31 GMT 2025","Mon Sep 01 22:30:31 GMT 2025","23","","com.cidadao_alerta.cidadao_alerta.CidadaoAlertaApplicationTests","","com.cidadao_alerta.cidadao_alerta.CidadaoAlertaApplicationTests","contextLoads","contextLoads()",""
+"failed","Wed Aug 20 22:54:39 GMT 2025","Wed Aug 20 22:54:39 GMT 2025","105","","com.cidadao_alerta.cidadao_alerta.TrivialTests","","com.cidadao_alerta.cidadao_alerta.TrivialTests","assertTrivialFail","assertTrivialFail()",""
+"failed","Wed Aug 20 22:51:49 GMT 2025","Wed Aug 20 22:51:49 GMT 2025","44","","com.cidadao_alerta.cidadao_alerta.trivialTests","","com.cidadao_alerta.cidadao_alerta.trivialTests","assertTrivialFail","assertTrivialFail()",""
+"passed","Wed Aug 20 22:51:49 GMT 2025","Wed Aug 20 22:51:49 GMT 2025","3","","com.cidadao_alerta.cidadao_alerta.trivialTests","","com.cidadao_alerta.cidadao_alerta.trivialTests","assertTrivialPass","assertTrivialPass()",""
+"passed","Wed Aug 20 22:57:12 GMT 2025","Wed Aug 20 22:57:12 GMT 2025","3","","com.cidadao_alerta.cidadao_alerta.TrivialTests","","com.cidadao_alerta.cidadao_alerta.TrivialTests","assertTrivialPass","assertTrivialPass()",""
