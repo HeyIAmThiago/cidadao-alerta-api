@@ -25,6 +25,6 @@ public class CommentMapper {
     }
 
     public static CommentEntity toEntity(CommentDTORequest comment, UserEntity user, ReportEntity report) {
-        return new CommentEntity(null, comment.text(), 0L, new AuditInfo(LocalDateTime.now(), LocalDateTime.now()), user, report);
+        return new CommentEntity(null, comment.text(), 0L, new AuditInfo(), user, report);
     }
 }
