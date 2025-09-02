@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -15,9 +16,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class AuditInfo {
     @CreationTimestamp
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
 
-    @CreationTimestamp
-    private LocalDateTime updated_at;
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
 }
