@@ -46,6 +46,8 @@ public class DatabaseSeeder implements CommandLineRunner {
                 "ON CONFLICT (id) DO NOTHING;";
             statement.executeUpdate(sqlReport);
 
+            statement.executeUpdate("TRUNCATE TABLE category CASCADE");
+
             String sqlCategory = "INSERT INTO category (description) VALUES " +
                     "('Enchente'), " +
                     "('Tiroteio'), " +
