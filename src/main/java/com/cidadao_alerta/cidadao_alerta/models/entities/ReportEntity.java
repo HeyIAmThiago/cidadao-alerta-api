@@ -1,6 +1,7 @@
 package com.cidadao_alerta.cidadao_alerta.models.entities;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
@@ -52,7 +53,8 @@ public class ReportEntity {
   private String imageUrl;
 
   @OneToMany(mappedBy = "report", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-  private Set<CommentEntity> comments;
+  @Builder.Default
+  private Set<CommentEntity> comments = new HashSet<>();
 
   @ManyToOne
   @JoinColumn(name = "status_report_id")

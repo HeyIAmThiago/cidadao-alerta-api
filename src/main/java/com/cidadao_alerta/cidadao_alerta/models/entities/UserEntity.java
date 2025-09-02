@@ -14,7 +14,8 @@
     import lombok.Getter;
     import lombok.Setter;
 
-    import java.util.Set;
+import java.util.HashSet;
+import java.util.Set;
     import java.util.UUID;
 
     @Getter
@@ -40,5 +41,5 @@
         private Role role;
 
         @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
-        private Set<CommentEntity> comments;
+        private Set<CommentEntity> comments = new HashSet<>();
     }

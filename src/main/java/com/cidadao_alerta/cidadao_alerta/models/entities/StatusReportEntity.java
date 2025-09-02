@@ -1,5 +1,6 @@
 package com.cidadao_alerta.cidadao_alerta.models.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -40,5 +41,6 @@ public class StatusReportEntity {
   private StatusReportEnum status;
 
   @OneToMany(mappedBy = "status")
-  private List<ReportEntity> reports;
+  @Builder.Default
+  private List<ReportEntity> reports = new ArrayList<>();
 }
