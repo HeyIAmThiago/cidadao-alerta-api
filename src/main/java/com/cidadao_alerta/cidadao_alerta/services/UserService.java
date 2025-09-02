@@ -37,6 +37,10 @@ public class UserService {
     public UserEntity createNewUser(UserDTORequest userDTO) {
         UserEntity entityToRegister = userMapper.toEntity(userDTO);
 
+        this.userRepository.findByEmail(entityToRegister.getEmail()).ifPresent(existingUser -> {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Já existe um usuário com esse email!");
+        });
+
         return userRepository.save(entityToRegister);
     }
 
