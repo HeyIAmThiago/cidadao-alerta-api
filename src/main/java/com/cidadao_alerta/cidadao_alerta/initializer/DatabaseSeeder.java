@@ -2,7 +2,6 @@ package com.cidadao_alerta.cidadao_alerta.initializer;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import com.cidadao_alerta.cidadao_alerta.services.ReportService;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.Statement;
@@ -11,11 +10,9 @@ import java.sql.Statement;
 public class DatabaseSeeder implements CommandLineRunner {
 
     private final DataSource dataSource;
-    private final ReportService reportService;
 
-    public DatabaseSeeder(DataSource dataSource, ReportService reportService) {
+    public DatabaseSeeder(DataSource dataSource) {
         this.dataSource = dataSource;
-        this.reportService = reportService;
     }
 
     @Override
@@ -25,8 +22,8 @@ public class DatabaseSeeder implements CommandLineRunner {
 
             statement.executeUpdate("TRUNCATE TABLE user_app RESTART IDENTITY CASCADE");
 
-            String sqlUser = "INSERT INTO user_app (name, password, email, role) VALUES " +
-                    "('Thiago Monteiro', 'senha123', 'thiago28@gmail.com', 'ADMIN')";
+            String sqlUser = "INSERT INTO user_app (id, name, password, email, role) VALUES " +
+                    "('f47ac10b-58cc-4372-a567-0e02b2c3d479', 'Thiago Monteiro', 'senha123', 'thiago28@gmail.com', 'ADMIN')";
             statement.executeUpdate(sqlUser);
 
             statement.executeUpdate("TRUNCATE TABLE report CASCADE");
@@ -48,11 +45,11 @@ public class DatabaseSeeder implements CommandLineRunner {
 
             statement.executeUpdate("TRUNCATE TABLE category CASCADE");
 
-            String sqlCategory = "INSERT INTO category (description) VALUES " +
-                    "('Enchente'), " +
-                    "('Tiroteio'), " +
-                    "('Arrastão'), " +
-                    "('Traficantes');";
+            String sqlCategory = "INSERT INTO category (id, description) VALUES " +
+                    "('1b2a3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d', 'Enchente'), " +
+                    "('2b3a4c5d-6e7f-8a9b-0c1d-2e3f4a5b6c7d', 'Tiroteio'), " +
+                    "('3b4a5c6d-7e8f-9a0b-1c2d-3e4f5a6b7c8d', 'Arrastão'), " +
+                    "('4b5a6c7d-8e9f-0a1b-2c3d-4e5f6a7b8c9d', 'Traficantes');";
             statement.executeUpdate(sqlCategory);
 
             statement.executeUpdate("TRUNCATE TABLE comment CASCADE");
