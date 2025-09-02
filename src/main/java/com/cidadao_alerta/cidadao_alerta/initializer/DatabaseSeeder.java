@@ -2,7 +2,6 @@ package com.cidadao_alerta.cidadao_alerta.initializer;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import com.cidadao_alerta.cidadao_alerta.services.ReportService;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.Statement;
@@ -11,11 +10,9 @@ import java.sql.Statement;
 public class DatabaseSeeder implements CommandLineRunner {
 
     private final DataSource dataSource;
-    private final ReportService reportService;
 
-    public DatabaseSeeder(DataSource dataSource, ReportService reportService) {
+    public DatabaseSeeder(DataSource dataSource) {
         this.dataSource = dataSource;
-        this.reportService = reportService;
     }
 
     @Override
@@ -25,8 +22,8 @@ public class DatabaseSeeder implements CommandLineRunner {
 
             statement.executeUpdate("TRUNCATE TABLE user_app RESTART IDENTITY CASCADE");
 
-            String sqlUser = "INSERT INTO user_app (name, password, email, role) VALUES " +
-                    "('Thiago Monteiro', 'senha123', 'thiago28@gmail.com', 'ADMIN')";
+            String sqlUser = "INSERT INTO user_app (id, name, password, email, role) VALUES " +
+                    "('f47ac10b-58cc-4372-a567-0e02b2c3d479', 'Thiago Monteiro', 'senha123', 'thiago28@gmail.com', 'ADMIN')";
             statement.executeUpdate(sqlUser);
 
             statement.executeUpdate("TRUNCATE TABLE report CASCADE");
@@ -46,12 +43,23 @@ public class DatabaseSeeder implements CommandLineRunner {
                 "ON CONFLICT (id) DO NOTHING;";
             statement.executeUpdate(sqlReport);
 
-            String sqlCategory = "INSERT INTO category (description) VALUES " +
-                    "('Enchente'), " +
-                    "('Tiroteio'), " +
-                    "('Arrastão'), " +
-                    "('Traficantes');";
+            statement.executeUpdate("TRUNCATE TABLE category CASCADE");
+
+            String sqlCategory = "INSERT INTO category (id, description) VALUES " +
+                    "('1b2a3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d', 'Enchente'), " +
+                    "('2b3a4c5d-6e7f-8a9b-0c1d-2e3f4a5b6c7d', 'Tiroteio'), " +
+                    "('3b4a5c6d-7e8f-9a0b-1c2d-3e4f5a6b7c8d', 'Arrastão'), " +
+                    "('4b5a6c7d-8e9f-0a1b-2c3d-4e5f6a7b8c9d', 'Traficantes');";
             statement.executeUpdate(sqlCategory);
+
+            String sqlReportCategory = "INSERT INTO report_category (report_id, category_id) VALUES " +
+                "('a6c8e2c4-8d7d-4c0a-bf1e-6a7b3c2d1e4f', '1b2a3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d')," +  // Denuncia 1 -> Enchente
+                "('b5d2f9a1-3c4e-42f9-8b2d-5f6e7c8a9b0c', '2b3a4c5d-6e7f-8a9b-0c1d-2e3f4a5b6c7d')," +  // Denuncia 2 -> Tiroteio
+                "('c1e7d4b8-5f3a-4d2e-9c8b-0a1f2e3d4c5b', '3b4a5c6d-7e8f-9a0b-1c2d-3e4f5a6b7c8d')," +  // Denuncia 3 -> Arrastão
+                "('d9b3e7f2-6c5a-4e1b-8d3c-2f4a5b6c7e8f', '4b5a6c7d-8e9f-0a1b-2c3d-4e5f6a7b8c9d')," +  // Denuncia 4 -> Traficantes
+                "('e2f4a7c9-1b3d-48e9-8f2a-6c5b7d8e9f0a', '2b3a4c5d-6e7f-8a9b-0c1d-2e3f4a5b6c7d')," +  // Denuncia 5 -> Tiroteio
+                "('e2f4a7c9-1b3d-48e9-8f2a-6c5b7d8e9f0a', '3b4a5c6d-7e8f-9a0b-1c2d-3e4f5a6b7c8d');"; // Denuncia 5 -> Arrastão
+            statement.executeUpdate(sqlReportCategory);
 
             statement.executeUpdate("TRUNCATE TABLE comment CASCADE");
 
