@@ -28,8 +28,8 @@ public class CommentEntity {
 
     @Embedded
     @AttributeOverrides({
-            @AttributeOverride( name = "created_at", column = @Column(name = "created_at")),
-            @AttributeOverride( name = "updated_at", column = @Column(name = "updated_at"))
+            @AttributeOverride( name = "createdAt", column = @Column(name = "created_at")),
+            @AttributeOverride( name = "updatedAt", column = @Column(name = "updated_at"))
     })
     AuditInfo temporalInfo;
 
